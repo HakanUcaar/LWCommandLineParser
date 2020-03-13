@@ -33,7 +33,7 @@ namespace LWCommandLineParser
                 var ValueArguments = Opt.Arguments.Where(o=>o.Type == ArgumentTypeEnum.Value);
                 foreach (var arg in ValueArguments)
                 {                    
-                    Obj.GetType().GetProperty(arg.MemberName).SetValue(Obj, this.Args[arg.ShortName.InIndex(this.Args) + 1]);
+                    Obj.GetType().GetProperty(arg.MemberName).SetValue(Obj, Convert.ChangeType(this.Args[arg.ShortName.InIndex(this.Args) + 1], arg.ArgType));
                 }
 
                 var MethodArguments = Opt.Arguments.Where(o => o.Type == ArgumentTypeEnum.Method);
@@ -65,6 +65,7 @@ namespace LWCommandLineParser
                     var Arg = new BaseArgument();
 
                     Arg.Type = ArgumentTypeEnum.Value;
+                    Arg.ArgType = typeof(T).GetPropAttributeValue(member.Name, (ValueArgumentAttribute d) => d.ValueType);
                     Arg.MemberName = member.Name;
                     Arg.ShortName = typeof(T).GetPropAttributeValue(member.Name, (ValueArgumentAttribute d) => d.ShortName);
                     Arg.LongName = typeof(T).GetPropAttributeValue(member.Name, (ValueArgumentAttribute d) => d.LongName);
