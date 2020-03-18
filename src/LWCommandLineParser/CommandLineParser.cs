@@ -1,14 +1,9 @@
 ﻿using LWCommandLineParser.Arguments;
-using LWCommandLineParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EDonusum.HKNCommanLineParser;
 using LWCommandLineParser.Attributies;
 using System.Reflection;
-using System.Collections;
 
 namespace LWCommandLineParser
 {
